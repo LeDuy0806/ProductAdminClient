@@ -43,7 +43,9 @@ import {
 } from 'src/state/userSlice';
 
 import { LicenseInfo } from '@mui/x-license-pro';
-LicenseInfo.setLicenseKey('ANHQUOC');
+LicenseInfo.setLicenseKey(
+    'x0jTPl0USVkVZV0SsMjM1kDNyADM5cjM2ETPZJVSQhVRsIDN0YTM6IVREJ1T0b9586ef25c9853decfa7709eee27a1e'
+);
 
 const InitForm = {
     userName: '',
@@ -231,7 +233,7 @@ const Customers = () => {
         } else {
             // console.log(error);
             switch (error.data) {
-                case 'userName already exists':
+                case 'UserName already exists':
                     setFormError((prev) => {
                         return { ...prev, existUserName: true };
                     });
@@ -310,7 +312,7 @@ const Customers = () => {
 
             <Modal
                 open={modalAdd}
-                onClose={modalAdd ? false : true}
+                // onClose={modalAdd ? false : true}
                 aria-labelledby='parent-modal-title'
                 aria-describedby='parent-modal-description'
             >

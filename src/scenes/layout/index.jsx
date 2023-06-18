@@ -11,6 +11,7 @@ const Layout = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const userId = useSelector((state) => state.global.userId);
     const { data } = useGetUserQuery(userId);
+    const user = data.message == 'User not found' ? null : data;
 
     return (
         <Box
@@ -19,7 +20,7 @@ const Layout = () => {
             height='100%'
         >
             <Sidebar
-                user={data || {}}
+                user={user || {}}
                 isNonMobile={isNonMobile}
                 drawerWidth='250px'
                 isSidebarOpen={isSidebarOpen}
@@ -27,7 +28,7 @@ const Layout = () => {
             />
             <Box flexGrow={1}>
                 <Navbar
-                    user={data || {}}
+                    user={user || {}}
                     isSidebarOpen={isSidebarOpen}
                     setIsSidebarOpen={setIsSidebarOpen}
                 />
