@@ -10,7 +10,7 @@ import {
 import FlexBetween from 'src/components/FlexBetween';
 import { useDispatch } from 'react-redux';
 import { setMode } from 'src/state';
-import quocanhImage from 'src/assets/quocanh.jpeg';
+import kevinImage from 'src/assets/kevin.jpg';
 import {
     AppBar,
     Button,
@@ -89,11 +89,14 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
                             <Box
                                 component='img'
                                 alt='profile'
-                                src={quocanhImage}
+                                src={kevinImage}
                                 height='32px'
                                 width='32px'
                                 borderRadius='50%'
-                                sx={{ objectFit: 'cover' }}
+                                sx={{
+                                    objectFit: 'cover',
+                                    objectPosition: 'center'
+                                }}
                             />
                             <Box textAlign='left'>
                                 <Typography
