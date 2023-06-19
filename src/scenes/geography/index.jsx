@@ -1,9 +1,13 @@
-import React from 'react';
+//Library
 import { Box, useTheme } from '@mui/material';
-import { useGetGeographyQuery } from 'src/state/api';
-import Header from 'src/components/Header';
 import { ResponsiveChoropleth } from '@nivo/geo';
 import { geoData } from 'src/state/geoData';
+
+//component
+import Header from 'src/components/Header';
+
+//RTkQuery
+import { useGetGeographyQuery } from 'src/state/api';
 
 const Geography = () => {
     const theme = useTheme();

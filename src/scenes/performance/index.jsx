@@ -1,15 +1,49 @@
-import React from 'react';
+//Library
+import { useState, useEffect } from 'react';
 import { Box, useTheme } from '@mui/material';
-import { useGetUserPerformanceQuery } from 'src/state/api';
 import { useSelector } from 'react-redux';
 import { DataGrid } from '@mui/x-data-grid';
+
+//component
 import Header from 'src/components/Header';
-import CustomColumnMenu from 'src/components/DataGridCustomColumnMenu';
+// import CustomColumnMenu from 'src/components/DataGridCustomColumnMenu';
+import DataGridCustomToolbar from 'src/components/DataGridCustomToolbar';
+
+//RTKQuery
+import { useGetUserPerformanceQuery } from 'src/state/api';
+
+//filter
+import filter from 'lodash.filter';
 
 const Performance = () => {
     const theme = useTheme();
     const userId = useSelector((state) => state.global.userId);
     const { data, isLoading } = useGetUserPerformanceQuery(userId);
+
+    const [filterUser, setFilterUser] = useState([]);
+    const [search, setSearch] = useState('');
+    const [searchInput, setSearchInput] = useState('');
+
+    useEffect(() => {
+        const contains = ({ _id, userId }, query) => {
+            console.log(query, userId);
+            if (
+                _id?.toLowerCase().includes(query) ||
+                userId?.toLowerCase().includes(query)
+            ) {
+                return true;
+            }
+            return false;
+        };
+
+        const fotmatQuery = searchInput?.toLowerCase();
+        const filterData = filter(data?.sales, (user) => {
+            return contains(user, fotmatQuery);
+        });
+        setFilterUser(filterData);
+    }, [searchInput]);
+
+    console.log(filterUser);
 
     const columns = [
         {
@@ -32,7 +66,7 @@ const Performance = () => {
             headerName: '# of Products',
             flex: 0.5,
             sortable: false,
-            renderCell: (params) => params.value.length
+            renderCell: (params) => params.value?.length
         },
         {
             field: 'cost',
@@ -79,10 +113,18 @@ const Performance = () => {
                 <DataGrid
                     loading={isLoading || !data}
                     getRowId={(row) => row._id}
-                    rows={(data && data.sales) || []}
+                    // rows={(data && data.sales) || []}
+                    rows={
+                        !searchInput && data
+                            ? data.sales
+                            : filterUser.length !== 0
+                            ? filterUser
+                            : []
+                    }
                     columns={columns}
-                    components={{
-                        ColumnMenu: CustomColumnMenu
+                    components={{ Toolbar: DataGridCustomToolbar }}
+                    componentsProps={{
+                        toolbar: { searchInput, setSearchInput, setSearch }
                     }}
                 />
             </Box>

@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+//Library
+import { useState, useEffect } from 'react';
 import { Box, useTheme } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { useGetTransactionsQuery } from 'src/state/api';
 import Header from 'src/components/Header';
 import DataGridCustomToolbar from 'src/components/DataGridCustomToolbar';
+
+//filter
+import filter from 'lodash.filter';
 
 const Transactions = () => {
     const theme = useTheme();
@@ -13,6 +17,7 @@ const Transactions = () => {
     const [pageSize, setPageSize] = useState(20);
     const [sort, setSort] = useState({});
     const [search, setSearch] = useState('');
+    const [filterUser, setFilterUser] = useState([]);
 
     const [searchInput, setSearchInput] = useState('');
     const { data, isLoading } = useGetTransactionsQuery({
@@ -21,6 +26,24 @@ const Transactions = () => {
         sort: JSON.stringify(sort),
         search
     });
+
+    useEffect(() => {
+        const contains = ({ _id, userId }, query) => {
+            if (
+                _id?.toLowerCase().includes(query) ||
+                userId?.toLowerCase().includes(query)
+            ) {
+                return true;
+            }
+            return false;
+        };
+
+        const fotmatQuery = searchInput?.toLowerCase();
+        const filterData = filter(data?.transactions, (user) => {
+            return contains(user, fotmatQuery);
+        });
+        setFilterUser(filterData);
+    }, [searchInput]);
 
     const columns = [
         {
@@ -89,7 +112,14 @@ const Transactions = () => {
                 <DataGrid
                     loading={isLoading || !data}
                     getRowId={(row) => row._id}
-                    rows={(data && data.transactions) || []}
+                    rows={
+                        !searchInput && data
+                            ? data.transactions
+                            : filterUser.length !== 0
+                            ? filterUser
+                            : []
+                    }
+                    // rows={(data && data.transactions) || []}
                     columns={columns}
                     rowCount={(data && data.total) || 0}
                     rowsPerPageOptions={[20, 50, 100]}

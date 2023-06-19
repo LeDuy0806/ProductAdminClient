@@ -1,6 +1,8 @@
-import React from 'react';
+//Library
 import { ResponsivePie } from '@nivo/pie';
 import { Box, Typography, useTheme } from '@mui/material';
+
+//RTKQuery
 import { useGetSalesQuery } from 'src/state/api';
 
 const BreakdownChart = ({ isDashboard = false }) => {
