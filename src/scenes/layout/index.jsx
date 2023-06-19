@@ -11,7 +11,7 @@ const Layout = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const userId = useSelector((state) => state.global.userId);
     const { data } = useGetUserQuery(userId);
-    const user = data.message == 'User not found' ? null : data;
+    const user = data?.message == 'User not found' ? null : data;
 
     return (
         <Box
