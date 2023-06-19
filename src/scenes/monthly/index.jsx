@@ -1,7 +1,12 @@
-import React, { useMemo } from 'react';
+//Library
+import { useMemo } from 'react';
 import { Box, useTheme } from '@mui/material';
-import Header from 'src/components/Header';
 import { ResponsiveLine } from '@nivo/line';
+
+//component
+import Header from 'src/components/Header';
+
+//RTKQuery
 import { useGetSalesQuery } from 'src/state/api';
 
 const Monthly = () => {

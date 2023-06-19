@@ -1,13 +1,50 @@
-import React from 'react';
+//Library
+import { useEffect, useState } from 'react';
 import { Box, useTheme } from '@mui/material';
-import { useGetAdminsQuery } from 'src/state/api';
 import { DataGrid } from '@mui/x-data-grid';
+
+//component
 import Header from 'src/components/Header';
-import CustomColumnMenu from 'src/components/DataGridCustomColumnMenu';
+import DataGridCustomToolbar from 'src/components/DataGridCustomToolbar';
+
+//RTKQuery
+import { useGetAdminsQuery } from 'src/state/api';
+
+//filter
+import filter from 'lodash.filter';
 
 const Admin = () => {
     const theme = useTheme();
     const { data, isLoading } = useGetAdminsQuery();
+    const [filterUser, setFilterUser] = useState([]);
+    const [search, setSearch] = useState('');
+    const [searchInput, setSearchInput] = useState('');
+
+    useEffect(() => {
+        const contains = (
+            { _id, name, email, PhoneNumber, role, occupation, country },
+            query
+        ) => {
+            if (
+                _id?.toLowerCase().includes(query) ||
+                name?.toLowerCase().includes(query) ||
+                email?.toLowerCase().includes(query) ||
+                role?.toLowerCase().includes(query) ||
+                occupation?.toLowerCase().includes(query) ||
+                country?.toLowerCase().includes(query) ||
+                PhoneNumber?.toLowerCase().includes(query)
+            ) {
+                return true;
+            }
+            return false;
+        };
+
+        const fotmatQuery = searchInput?.toLowerCase();
+        const filterData = filter(data, (user) => {
+            return contains(user, fotmatQuery);
+        });
+        setFilterUser(filterData);
+    }, [searchInput]);
 
     const columns = [
         {
@@ -90,10 +127,20 @@ const Admin = () => {
                 <DataGrid
                     loading={isLoading || !data}
                     getRowId={(row) => row._id}
-                    rows={data || []}
+                    // rows={
+                    //     filterUser.length !== 0 ? filterUser : data ? data : []
+                    // }
+                    rows={
+                        !searchInput && data
+                            ? data
+                            : filterUser.length !== 0
+                            ? filterUser
+                            : []
+                    }
                     columns={columns}
-                    components={{
-                        ColumnMenu: CustomColumnMenu
+                    components={{ Toolbar: DataGridCustomToolbar }}
+                    componentsProps={{
+                        toolbar: { searchInput, setSearchInput, setSearch }
                     }}
                 />
             </Box>

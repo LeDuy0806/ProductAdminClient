@@ -25,12 +25,12 @@ import {
 import FlexBetween from 'src/components/FlexBetween';
 
 //redux
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setMode } from 'src/state';
+import { updateSearch } from 'src/state/searchSlice';
 
 //image
 import kevinImage from 'src/assets/kevin.jpg';
-
 
 const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
     const dispatch = useDispatch();
@@ -40,6 +40,13 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
     const isOpen = Boolean(anchorEl);
     const handleClick = (event) => setAnchorEl(event.currentTarget);
     const handleClose = () => setAnchorEl(null);
+
+    const search = useSelector((state) => state.search.search);
+
+    const handleSearch = (e) => {
+        // console.log(e.target.value)
+        dispatch(updateSearch(e.target.value));
+    };
 
     return (
         <AppBar
@@ -63,7 +70,10 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
                         gap='3rem'
                         p='0.1rem 1.5rem'
                     >
-                        <InputBase placeholder='Search...' />
+                        <InputBase
+                            placeholder='Search Product...'
+                            onChange={(e) => handleSearch(e)}
+                        />
                         <IconButton>
                             <Search />
                         </IconButton>

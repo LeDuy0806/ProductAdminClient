@@ -8,12 +8,14 @@ import { Provider } from 'react-redux';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { api } from 'src/state/api';
 import userReducer from 'src/state/userSlice';
+import searchReducer from 'src/state/searchSlice';
 
 const store = configureStore({
     reducer: {
         global: globalReducer,
         [api.reducerPath]: api.reducer,
-        users: userReducer
+        users: userReducer,
+        search:searchReducer
     },
     middleware: (getDefault) => getDefault().concat(api.middleware)
 });

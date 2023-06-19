@@ -1,5 +1,4 @@
 //Library
-import React from 'react';
 import {
     DownloadOutlined,
     Email,
