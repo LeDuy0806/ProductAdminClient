@@ -16,11 +16,11 @@ export const api = createApi({
     ],
     endpoints: (build) => ({
         getUser: build.query({
-            query: (id) => `api/user/${id}`,
-            providesTags: ['User'],
-        }),
+            query: (id) => `general/user/${id}`,
+            providesTags: ["User"],
+          }),
         getProducts: build.query({
-            query: () => 'api/products',
+            query: () => 'client/products',
             providesTags: ['Products'],
         }),
         getCustomers: build.query({

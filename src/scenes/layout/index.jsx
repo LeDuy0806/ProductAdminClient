@@ -1,9 +1,16 @@
+//Library
 import React, { useState } from 'react';
 import { Box, useMediaQuery } from '@mui/material';
 import { Outlet } from 'react-router-dom';
+
+//redux
 import { useSelector } from 'react-redux';
+
+//component
 import Navbar from 'src/components/Navbar';
 import Sidebar from 'src/components/Sidebar';
+
+//RTKQuery
 import { useGetUserQuery } from 'src/state/api';
 
 const Layout = () => {

@@ -1,9 +1,16 @@
+//Library
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+
+//redux
+import { useSelector } from 'react-redux';
+
+//theme
 import { themeSettings } from 'src/theme';
+
+//Screen
 import Layout from 'src/scenes/layout';
 import Dashboard from 'src/scenes/dashboard';
 import Products from 'src/scenes/products';
