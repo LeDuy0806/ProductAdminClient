@@ -1,4 +1,4 @@
-// import React from 'react';
+//Library
 import {
     Box,
     // Divider,
@@ -13,7 +13,6 @@ import {
     useTheme
 } from '@mui/material';
 import {
-    SettingsOutlined,
     ChevronLeft,
     ChevronRightOutlined,
     HomeOutlined,
@@ -30,8 +29,9 @@ import {
 } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+
+//Flex
 import FlexBetween from './FlexBetween';
-import profileImage from 'src/assets/profile.jpeg';
 
 const navItems = [
     {
@@ -93,7 +93,6 @@ const navItems = [
 ];
 
 const Sidebar = ({
-    user,
     drawerWidth,
     isSidebarOpen,
     setIsSidebarOpen,

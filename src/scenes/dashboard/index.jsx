@@ -1,6 +1,5 @@
+//Library
 import React from 'react';
-import FlexBetween from 'src/components/FlexBetween';
-import Header from 'src/components/Header';
 import {
     DownloadOutlined,
     Email,
@@ -16,10 +15,18 @@ import {
     useMediaQuery
 } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
+
+//component
+import Header from 'src/components/Header';
 import BreakdownChart from 'src/components/BreakdownChart';
 import OverviewChart from 'src/components/OverviewChart';
-import { useGetDashboardQuery } from 'src/state/api';
 import StatBox from 'src/components/StatBox';
+
+//RTKQuery
+import { useGetDashboardQuery } from 'src/state/api';
+
+//Flex
+import FlexBetween from 'src/components/FlexBetween';
 
 const Dashboard = () => {
     const theme = useTheme();

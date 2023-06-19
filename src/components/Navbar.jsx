@@ -1,3 +1,4 @@
+//Library
 import React, { useState } from 'react';
 import {
     LightModeOutlined,
@@ -7,10 +8,6 @@ import {
     SettingsOutlined,
     ArrowDropDownOutlined
 } from '@mui/icons-material';
-import FlexBetween from 'src/components/FlexBetween';
-import { useDispatch } from 'react-redux';
-import { setMode } from 'src/state';
-import kevinImage from 'src/assets/kevin.jpg';
 import {
     AppBar,
     Button,
@@ -23,6 +20,17 @@ import {
     MenuItem,
     useTheme
 } from '@mui/material';
+
+//Flex
+import FlexBetween from 'src/components/FlexBetween';
+
+//redux
+import { useDispatch } from 'react-redux';
+import { setMode } from 'src/state';
+
+//image
+import kevinImage from 'src/assets/kevin.jpg';
+
 
 const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
     const dispatch = useDispatch();
@@ -104,13 +112,15 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
                                     fontSize='0.85rem'
                                     sx={{ color: theme.palette.secondary[100] }}
                                 >
-                                    {user.name}
+                                    {/* {user.name} */}
+                                    QuocAnh
                                 </Typography>
                                 <Typography
                                     fontSize='0.75rem'
                                     sx={{ color: theme.palette.secondary[200] }}
                                 >
-                                    {user.occupation}
+                                    {/* {user.occupation} */}
+                                    Have a good day
                                 </Typography>
                             </Box>
                             <ArrowDropDownOutlined
