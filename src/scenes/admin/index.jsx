@@ -11,7 +11,7 @@ const Admin = () => {
 
     const columns = [
         {
-            field: '_id',
+            field: 'id',
             headerName: 'ID',
             flex: 1
         },
@@ -89,7 +89,7 @@ const Admin = () => {
             >
                 <DataGrid
                     loading={isLoading || !data}
-                    getRowId={(row) => row._id}
+                    getRowId={(row) => row.id}
                     rows={data || []}
                     columns={columns}
                     components={{

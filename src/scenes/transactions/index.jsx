@@ -9,7 +9,7 @@ const Transactions = () => {
     const theme = useTheme();
 
     // values to be sent to the backend
-    const [page, setPage] = useState(0);
+    const [page, setPage] = useState(1);
     const [pageSize, setPageSize] = useState(20);
     const [sort, setSort] = useState({});
     const [search, setSearch] = useState('');
@@ -18,13 +18,13 @@ const Transactions = () => {
     const { data, isLoading } = useGetTransactionsQuery({
         page,
         pageSize,
-        sort: JSON.stringify(sort),
+        sort: JSON.stringify(sort) != '{}' ? JSON.stringify(sort) : '',
         search
     });
 
     const columns = [
         {
-            field: '_id',
+            field: 'id',
             headerName: 'ID',
             flex: 1
         },
@@ -88,7 +88,7 @@ const Transactions = () => {
             >
                 <DataGrid
                     loading={isLoading || !data}
-                    getRowId={(row) => row._id}
+                    getRowId={(row) => row.id}
                     rows={(data && data.transactions) || []}
                     columns={columns}
                     rowCount={(data && data.total) || 0}

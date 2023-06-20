@@ -1,13 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, useTheme } from '@mui/material';
 import { useGetGeographyQuery } from 'src/state/api';
 import Header from 'src/components/Header';
 import { ResponsiveChoropleth } from '@nivo/geo';
 import { geoData } from 'src/state/geoData';
+import getCountryISO3 from 'src/utils/getCountryISO3';
 
 const Geography = () => {
     const theme = useTheme();
-    const { data } = useGetGeographyQuery();
+    const { data, isLoading } = useGetGeographyQuery();
+
+    let newData;
+    useEffect(() => {
+        if (data) {
+            newData = data.map((item) => ({
+                ...item,
+                id: getCountryISO3(item.id)
+            }));
+        }
+        console.log(newData);
+    }, [isLoading]);
 
     return (
         <Box m='1.5rem 2.5rem'>
@@ -21,9 +33,9 @@ const Geography = () => {
                 border={`1px solid ${theme.palette.secondary[200]}`}
                 borderRadius='4px'
             >
-                {data ? (
+                {newData ? (
                     <ResponsiveChoropleth
-                        data={data}
+                        data={newData}
                         theme={{
                             axis: {
                                 domain: {
