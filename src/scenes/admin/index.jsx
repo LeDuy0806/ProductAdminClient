@@ -22,11 +22,11 @@ const Admin = () => {
 
     useEffect(() => {
         const contains = (
-            { _id, name, email, PhoneNumber, role, occupation, country },
+            { id, name, email, PhoneNumber, role, occupation, country },
             query
         ) => {
             if (
-                _id?.toLowerCase().includes(query) ||
+                id?.toLowerCase().includes(query) ||
                 name?.toLowerCase().includes(query) ||
                 email?.toLowerCase().includes(query) ||
                 role?.toLowerCase().includes(query) ||
@@ -48,7 +48,7 @@ const Admin = () => {
 
     const columns = [
         {
-            field: '_id',
+            field: 'id',
             headerName: 'ID',
             flex: 1
         },
@@ -126,7 +126,7 @@ const Admin = () => {
             >
                 <DataGrid
                     loading={isLoading || !data}
-                    getRowId={(row) => row._id}
+                    getRowId={(row) => row.id}
                     // rows={
                     //     filterUser.length !== 0 ? filterUser : data ? data : []
                     // }
