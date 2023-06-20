@@ -21,16 +21,16 @@ const Transactions = () => {
 
     const [searchInput, setSearchInput] = useState('');
     const { data, isLoading } = useGetTransactionsQuery({
-        page,
+        page: page + 1,
         pageSize,
         sort: JSON.stringify(sort),
         search
     });
 
     useEffect(() => {
-        const contains = ({ _id, userId }, query) => {
+        const contains = ({ id, userId }, query) => {
             if (
-                _id?.toLowerCase().includes(query) ||
+                id?.toLowerCase().includes(query) ||
                 userId?.toLowerCase().includes(query)
             ) {
                 return true;
@@ -47,7 +47,7 @@ const Transactions = () => {
 
     const columns = [
         {
-            field: '_id',
+            field: 'id',
             headerName: 'ID',
             flex: 1
         },
@@ -111,7 +111,7 @@ const Transactions = () => {
             >
                 <DataGrid
                     loading={isLoading || !data}
-                    getRowId={(row) => row._id}
+                    getRowId={(row) => row.id}
                     rows={
                         !searchInput && data
                             ? data.transactions

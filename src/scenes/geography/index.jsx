@@ -8,11 +8,25 @@ import Header from 'src/components/Header';
 
 //RTkQuery
 import { useGetGeographyQuery } from 'src/state/api';
+import { useEffect } from 'react';
+import getCountryISO3 from 'src/utils/getCountryISO3';
+import { useState } from 'react';
 
 const Geography = () => {
     const theme = useTheme();
     const { data } = useGetGeographyQuery();
+    const [result, setResult] = useState();
 
+    useEffect(() => {
+        if (data) {
+            setResult(
+                data.map((item) => ({
+                    ...item,
+                    id: getCountryISO3(item.id)
+                }))
+            );
+        }
+    }, [data]);
     return (
         <Box m='1.5rem 2.5rem'>
             <Header
@@ -25,9 +39,9 @@ const Geography = () => {
                 border={`1px solid ${theme.palette.secondary[200]}`}
                 borderRadius='4px'
             >
-                {data ? (
+                {result ? (
                     <ResponsiveChoropleth
-                        data={data}
+                        data={result}
                         theme={{
                             axis: {
                                 domain: {

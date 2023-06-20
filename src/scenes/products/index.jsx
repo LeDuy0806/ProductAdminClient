@@ -24,7 +24,7 @@ import { useGetProductsQuery } from 'src/state/api';
 import filter from 'lodash.filter';
 
 const Product = ({
-    _id,
+    id,
     name,
     description,
     price,
@@ -83,7 +83,7 @@ const Product = ({
                 }}
             >
                 <CardContent>
-                    <Typography>id: {_id}</Typography>
+                    <Typography>id: {id}</Typography>
                     <Typography>Supply Left: {supply}</Typography>
                     <Typography>
                         Yearly Sales This Year: {stat.yearlySalesTotal}
@@ -143,7 +143,7 @@ const Products = () => {
                     {!search && data
                         ? data.map(
                               ({
-                                  _id,
+                                  id,
                                   name,
                                   description,
                                   price,
@@ -153,8 +153,8 @@ const Products = () => {
                                   stat
                               }) => (
                                   <Product
-                                      key={_id}
-                                      _id={_id}
+                                      key={id}
+                                      id={id}
                                       name={name}
                                       description={description}
                                       price={price}
@@ -168,7 +168,7 @@ const Products = () => {
                         : filterUser.length !== 0
                         ? filterUser.map(
                               ({
-                                  _id,
+                                  id,
                                   name,
                                   description,
                                   price,
@@ -178,8 +178,8 @@ const Products = () => {
                                   stat
                               }) => (
                                   <Product
-                                      key={_id}
-                                      _id={_id}
+                                      key={id}
+                                      id={id}
                                       name={name}
                                       description={description}
                                       price={price}

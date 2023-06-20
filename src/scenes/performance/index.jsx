@@ -25,10 +25,10 @@ const Performance = () => {
     const [searchInput, setSearchInput] = useState('');
 
     useEffect(() => {
-        const contains = ({ _id, userId }, query) => {
+        const contains = ({ id, userId }, query) => {
             console.log(query, userId);
             if (
-                _id?.toLowerCase().includes(query) ||
+                id?.toLowerCase().includes(query) ||
                 userId?.toLowerCase().includes(query)
             ) {
                 return true;
@@ -47,7 +47,7 @@ const Performance = () => {
 
     const columns = [
         {
-            field: '_id',
+            field: 'id',
             headerName: 'ID',
             flex: 1
         },
@@ -112,7 +112,7 @@ const Performance = () => {
             >
                 <DataGrid
                     loading={isLoading || !data}
-                    getRowId={(row) => row._id}
+                    getRowId={(row) => row.id}
                     // rows={(data && data.sales) || []}
                     rows={
                         !searchInput && data
