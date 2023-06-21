@@ -123,7 +123,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
                                     sx={{ color: theme.palette.secondary[100] }}
                                 >
                                     {/* {user.name} */}
-                                    QuocAnh
+                                    OverPower
                                 </Typography>
                                 <Typography
                                     fontSize='0.75rem'

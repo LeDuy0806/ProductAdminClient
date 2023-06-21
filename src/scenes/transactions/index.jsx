@@ -26,7 +26,9 @@ const Transactions = () => {
         sort: JSON.stringify(sort),
         search
     });
-
+    useEffect(() => {
+        console.log(sort);
+    }, [sort]);
     useEffect(() => {
         const contains = ({ id, userId }, query) => {
             if (
