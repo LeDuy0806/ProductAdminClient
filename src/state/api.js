@@ -52,7 +52,7 @@ export const api = createApi({
             providesTags: ['Performance']
         }),
         getDashboard: build.query({
-            query: () => 'general/dashboard',
+            query: () => 'client/dashboard',
             providesTags: ['Dashboard']
         }),
 
@@ -65,7 +65,7 @@ export const api = createApi({
 
         createUser: build.mutation({
             query: (formData) => ({
-                url: `api/users`,
+                url: `api/user`,
                 method: 'POST',
                 body: formData
             })
@@ -73,7 +73,7 @@ export const api = createApi({
 
         updateUser: build.mutation({
             query: ({ id, updateUser }) => ({
-                url: `api/users/${id}`,
+                url: `api/user/${id}`,
                 method: 'PATCH',
                 body: updateUser
             })
@@ -81,67 +81,7 @@ export const api = createApi({
 
         deleteUser: build.mutation({
             query: (id) => ({
-                url: `api/users/${id}`,
-                method: 'DELETE'
-            })
-        }),
-
-        getAllQuizes: build.query({
-            query: () => ({
-                url: `api/quizzes`,
-                method: 'GET'
-            })
-        }),
-
-        createQuiz: build.mutation({
-            query: (formData) => ({
-                url: `api/quizzes`,
-                method: 'POST',
-                body: formData
-            })
-        }),
-
-        updateQuiz: build.mutation({
-            query: ({ id, updateQuiz }) => ({
-                url: `api/quizzes/${id}`,
-                method: 'PATCH',
-                body: updateQuiz
-            })
-        }),
-
-        deleteQuiz: build.mutation({
-            query: (id) => ({
-                url: `api/quizzes/${id}`,
-                method: 'DELETE'
-            })
-        }),
-
-        getGames: build.query({
-            query: () => ({
-                url: `api/games`,
-                method: 'GET'
-            })
-        }),
-
-        createGame: build.mutation({
-            query: (formData) => ({
-                url: `api/games`,
-                method: 'POST',
-                body: formData
-            })
-        }),
-
-        updateGame: build.mutation({
-            query: ({ id, updateGame }) => ({
-                url: `api/games/${id}`,
-                method: 'PATCH',
-                body: updateGame
-            })
-        }),
-
-        deleteGame: build.mutation({
-            query: (id) => ({
-                url: `api/games/${id}`,
+                url: `api/user/${id}`,
                 method: 'DELETE'
             })
         })
@@ -161,16 +101,15 @@ export const {
 
     useGetAllUsersQuery,
     useCreateUserMutation,
-    useUpdateGameMutation,
-    useDeleteUserMutation,
-
-    useGetAllQuizesQuery,
-    useCreateQuizMutation,
-    useUpdateQuizMutation,
-    useDeleteQuizMutation,
-
-    useGetGamesQuery,
-    useCreateGameMutation,
     useUpdateUserMutation,
-    useDeleteGameMutation
+    useDeleteUserMutation
+
+    // useUpdateGameMutation,
+    // useGetAllQuizesQuery,
+    // useCreateQuizMutation,
+    // useUpdateQuizMutation,
+    // useDeleteQuizMutation,
+    // useGetGamesQuery,
+    // useCreateGameMutation,
+    // useDeleteGameMutation
 } = api;
